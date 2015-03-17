@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+# try something like
+
+@auth.requires_login()
+def index():
+    user_id = request.args(0) or auth.user.id
+    information = get_profile(user_id)
+    return dict(user_id=user_id, info=information)
+
+@auth.requires_login()
+def view_profile():
+    user_id = request.args(0) or auth.user.id
+    information = get_profile(user_id)
+    image = db(db.user_profile.user_id).select(db.user_profile.image).first()
+    profile_img = SQLFORM(db.user_profile.image)
+    return dict(user_id=user_id, profile=information, image=profile_img)
+
+@auth.requires_login()
+def create_profile():
+    user_id = auth.user.id
+    form = SQLFORM(db.user_profile)
+
+    if(form.process().accepted):
+        if(not(has_profile_image(user_id))):
+            row = db(db.user_profile.user_id==user_id).select().first()
+            row.update_record(image='/Roomie/static/images/roomie/blank_profile.jpg')
+
+        redirect(URL('profile','view_profile',args=(user_id)))
+
+    return dict(form=form)
+
+
+@auth.requires_login()
+def edit_profile():
+    user_id = auth.user.id
+    profile = db(db.user_profile.user_id==user_id).select().first()
+    form = SQLFORM(db.user_profile, profile)
+
+    if(form.process().accepted):
+        if(not(has_profile_image(user_id))):
+            row = db(db.user_profile.user_id==user_id).select().first()
+            row.update_record(image='/Roomie/static/images/roomie/blank_profile.jpg')
+
+        redirect(URL('profile','view_profile',args=(user_id)))
+    return dict(form=form)
+
+
+def get_profile(user_id):
+    profile = db(db.user_profile.user_id==user_id).select().first()
+    return profile
+
+def has_profile_image(user_id):
+    image = db(db.user_profile.user_id==user_id).select(db.user_profile.image).first()
+    if(image != None):
+        return True
+    else:
+        return False

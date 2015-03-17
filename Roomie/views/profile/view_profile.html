@@ -1,0 +1,79 @@
+{{extend 'layout.html'}}
+
+
+<body>
+    <div>
+        {{if(profile.user_id == auth.user.id):}}
+            {{ =A('Edit Profile', _class='btn pull-right', _href=URL('profile', 'edit_profile')) }}
+        {{pass}}
+
+        <h3>
+            <font color="#FFFFFF">{{=profile.first_name+" "+profile.last_name}}</font>
+        </h3>
+        <table>
+        <tr><td>
+        {{if(profile.image == ''):}}
+            No Image
+        {{else:}}
+            {{=TAG.img(_class="profile_image",_width="150", _height="150",_src=URL(r=request,c='default',f='download',args=[profile.image]))}}
+        {{pass}}
+        </td>
+        <td>
+            <div class="bio_box"><font color="#FFFFFF">{{=profile.bio}}</font></div>
+        </td>
+        </tr>
+
+
+    </table>
+    </div>
+    </br>
+    <div>
+    {{if(profile.user_id != auth.user.id):}}
+        {{ =A('Send Message', _class='btn', _href=URL('message', 'send_message', args=(profile.user_id))) }}
+    {{pass}}
+    {{if(not friend) and (profile.user_id != auth.user_id):}}
+        {{=A('Request Roomie', _class='btn', _href=URL('profile', 'request_roomie', args=[profile.user_id]))}}
+    {{pass}}
+
+        <table text="white">
+            <tr><td><font color="#FFFFFF" size="3">Phone Number: {{=profile.phone}}</font></td></tr>
+            <tr><td><font color="#FFFFFF" size="3">Email: {{=profile.email}}</font></td></tr>
+            <tr><td><font color="#FFFFFF" size="3">Gender: {{=profile.gender}}</font></td></tr>
+            <tr><td><font color="#FFFFFF" size="3">State: {{=profile.state_location}}</font></td></tr>
+            <tr><td><font color="#FFFFFF" size="3">City: {{=profile.city_location}}</font></td></tr>
+        </table>
+
+    </div>
+
+    <hr>
+    <div>
+        {{if friend:}}
+            <h3><font color="#FFFFFF">Leave an Anonymous Review:</font></h3>
+            {{=form}}
+        {{pass}}
+    </div>
+    <div>
+        <h3><font color="#FFFFFF">Anonymous Reviews From Past Roomies:</font></h3>
+        {{for review in reviews:}}
+            <div class="comment_box">
+            <font color="#FFFFFF">{{=review.review_content}}</br></font>
+            </div>
+        {{pass}}
+    </div>
+
+    <hr>
+    <div>
+        <h3><font color="#FFFFFF">Roomies:</font></h3>
+        {{for key in friend_info:}}
+            {{if(int(key) != profile.user_id):}}
+                <a href={{=URL('profile','view_profile',args=[key])}}>
+                <div align="center">
+                <font color="#FFFFFF">{{=friend_info[key][0]}}</br>{{=TAG.img(_class="profile_image",_width="100",_src=URL(r=request,c='default',f='download',args=[friend_info[key][1]]))}}</font>
+                </div>
+                </a>
+                </br></br>
+            {{pass}}
+        {{pass}}
+    </div>
+
+</body>

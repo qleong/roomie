@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.ValueError'> invalid literal for long() with base 10: 'URL__profile____send_message___args=_profile.user_id__'"
+p3
+sS'layer'
+p4
+S'/Applications/web2py.app/Contents/Resources/applications/Roomie/controllers/profile.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\n# try something like\n\n@auth.requires_login()\ndef index():\n    user_id = request.args(0) or auth.user.id\n    information = get_profile(user_id)\n    return dict(user_id=user_id, info=information)\n\n@auth.requires_login()\ndef view_profile():\n    user_id = request.args(0) or auth.user.id\n    information = get_profile(user_id)\n    if(information == None):\n        redirect(URL('profile', 'create_profile'))\n    return dict(user_id=user_id, profile=information)\n\n@auth.requires_login()\ndef create_profile():\n    user_id = auth.user.id\n    form = SQLFORM(db.user_profile)\n\n    if(form.process().accepted):\n        if(not(has_profile_image(user_id))):\n            row = db(db.user_profile.user_id==user_id).select().first()\n            row.update_record(image='/Roomie/static/images/roomie/blank_profile.jpg')\n\n        redirect(URL('profile','view_profile',args=(user_id)))\n\n    return dict(form=form)\n\n\n@auth.requires_login()\ndef edit_profile():\n    user_id = auth.user.id\n    profile = db(db.user_profile.user_id==user_id).select().first()\n    form = SQLFORM(db.user_profile, profile)\n\n    if(form.process().accepted):\n        if(not(has_profile_image(user_id))):\n            row = db(db.user_profile.user_id==user_id).select().first()\n            row.update_record(image='/Roomie/static/images/roomie/blank_profile.jpg')\n\n        redirect(URL('profile','view_profile',args=(user_id)))\n    return dict(form=form)\n\n\ndef get_profile(user_id):\n    profile = db(db.user_profile.user_id==user_id).select().first()\n    return profile\n\ndef has_profile_image(user_id):\n    image = db(db.user_profile.user_id==user_id).select(db.user_profile.image).first()\n    if(image == ''):\n        return True\n    else:\n        return False\n\nresponse._vars=response._caller(view_profile)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/Applications/web2py.app/Contents/Resources/gluon/restricted.py", line 224, in restricted\n  File "/Applications/web2py.app/Contents/Resources/applications/Roomie/controllers/profile.py", line 59, in <module>\n  File "/Applications/web2py.app/Contents/Resources/gluon/globals.py", line 392, in <lambda>\n  File "/Applications/web2py.app/Contents/Resources/gluon/tools.py", line 3439, in f\n  File "/Applications/web2py.app/Contents/Resources/applications/Roomie/controllers/profile.py", line 13, in view_profile\n  File "/Applications/web2py.app/Contents/Resources/applications/Roomie/controllers/profile.py", line 49, in get_profile\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 10749, in select\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 2472, in select\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 1868, in select\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 1767, in _select\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 1544, in expand\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 1440, in EQ\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 1555, in expand\n  File "/Applications/web2py.app/Contents/Resources/gluon/dal.py", line 2012, in represent\nValueError: invalid literal for long() with base 10: \'URL__profile____send_message___args=_profile.user_id__\'\n'
+p11
+s.

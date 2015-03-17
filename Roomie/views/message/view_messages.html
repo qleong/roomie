@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{{extend 'layout.html'}}
+
+<body>
+    {{=form}}
+    <table>
+        {{for message in messages:}}
+        <tr>
+            <td>
+                <div class="comment_box">
+                <font color="#FFFFFF">
+                {{if (int(message.sender) == auth.user.id):}}
+                    {{=sender}}: {{=message.body}}
+                {{else:}}
+                    {{=recipient}}: {{=message.body}}
+                {{pass}}
+                </font>
+                </div>
+            </td>
+        </tr>
+        {{pass}}
+    </table>
+</body>

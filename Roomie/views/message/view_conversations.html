@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+<body>
+    <table>
+        <thead>
+        <tr><th>Conversations</th></tr>
+        </thead>
+        <tbody>
+        {{for conversation in conversations:}}
+            <tr><td>
+            <a href={{=URL('message','view_messages',args=[conversation.id])}} style="color:black;">
+            <div class="conversation_box">
+                From: {{=conversation.name}}</br>
+                Topic: {{=conversation.topic}}</br>
+            </div>
+            </a>
+            </td></tr>
+        {{pass}}
+        </tbody>
+    </table>
+</body>

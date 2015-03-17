@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{{extend 'layout.html'}}
+
+<body>
+    <div align="center">
+    {{=form}}
+    </div>
+
+    <table>
+    {{for result in names:}}
+        <tr>
+            <td>
+            <a href={{=URL('profile','view_profile',args=[result.user_id])}} style="color:black">
+            <div>
+                {{=str(result.first_name+" "+result.last_name)}}</br>
+                Location: {{=result.city_location +  ", " + result.state_location}}</br>
+                {{=TAG.img(_class="profile_image",_width="150",_src=URL(r=request,c='default',f='download',args=[result.image]))}}
+            </div>
+            </a>
+            </td>
+        </tr>
+    {{pass}}
+    {{for result in city:}}
+         <tr>
+             <td>
+             <a href={{=URL('profile','view_profile',args=[result.user_id])}} style="color:black">
+            <div>
+                {{=str(result.first_name+" "+result.last_name)}}</br>
+                Location: {{=result.city_location +  ", " + result.state_location}}</br>
+                {{=TAG.img(_class="profile_image",_width="75",_src=URL(r=request,c='default',f='download',args=[result.image]))}}
+            </div>
+            </a>
+        </tr>
+    {{pass}}
+    </table>
+</body>

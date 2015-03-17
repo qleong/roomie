@@ -1,0 +1,443 @@
+timestamp: 2015-03-15T17:52:58.632443
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2015-03-15T17:52:58.635559
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-03-15T17:52:58.638373
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-03-15T17:52:58.640785
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-03-15T17:52:58.644134
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-03-15T17:52:58.646788
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-03-15T20:22:14.307303
+CREATE TABLE user_profile(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    first_name CHAR(512),
+    last_name CHAR(512),
+    phone CHAR(512),
+    email CHAR(512),
+    bio CHAR(512),
+    image CHAR(512)
+);
+success!
+success!
+timestamp: 2015-03-16T16:56:23.827909
+ALTER TABLE user_profile ADD city_location CHAR(512);
+timestamp: 2015-03-16T16:56:23.841591
+ALTER TABLE user_profile ADD state_location CHAR(512);
+timestamp: 2015-03-16T16:56:23.845813
+ALTER TABLE user_profile ADD gender CHAR(512);
+success!
+success!
+timestamp: 2015-03-16T19:02:33.875433
+CREATE TABLE message_item(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender CHAR(512),
+    recipient CHAR(512),
+    topic CHAR(512),
+    message_content CHAR(512),
+    viewed CHAR(512),
+    ts_sent CHAR(512)
+);
+success!
+timestamp: 2015-03-16T21:20:52.400056
+CREATE TABLE conversation(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender CHAR(512),
+    recipient CHAR(512),
+    topic CHAR(512),
+    viewed CHAR(512),
+    ts_update CHAR(512)
+);
+success!
+timestamp: 2015-03-16T21:21:53.303607
+ALTER TABLE message_item ADD conversation_id CHAR(512);
+timestamp: 2015-03-16T21:21:53.315678
+ALTER TABLE message_item ADD body CHAR(512);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM conversation;
+DELETE FROM sqlite_sequence WHERE name='conversation';
+success!
+DELETE FROM message_item;
+DELETE FROM sqlite_sequence WHERE name='message_item';
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM message_item;
+DELETE FROM sqlite_sequence WHERE name='message_item';
+success!
+success!
+DELETE FROM message_item;
+DELETE FROM sqlite_sequence WHERE name='message_item';
+success!
+DELETE FROM conversation;
+DELETE FROM sqlite_sequence WHERE name='conversation';
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM conversation;
+DELETE FROM sqlite_sequence WHERE name='conversation';
+success!
+DELETE FROM message_item;
+DELETE FROM sqlite_sequence WHERE name='message_item';
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-03-17T02:49:59.992952
+CREATE TABLE roomies(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id CHAR(512),
+    friend_id CHAR(512),
+    accepted CHAR(512)
+);
+success!
+DELETE FROM roomies;
+DELETE FROM sqlite_sequence WHERE name='roomies';
+success!
+timestamp: 2015-03-17T03:34:39.769451
+CREATE TABLE review(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    friend_id CHAR(512),
+    user_id CHAR(512),
+    review_content CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!

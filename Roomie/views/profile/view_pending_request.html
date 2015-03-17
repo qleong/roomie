@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{{extend 'layout.html'}}
+
+<body>
+<table>
+    {{for row in requests:}}
+        <tr>
+
+            <td>
+
+                    Request From: <a href={{=URL('profile', 'view_profile', args=[row.user_id])}}><font color="#000">{{=names[row.user_id]}}</font></a>
+
+
+            </td>
+            <td><a href={{=URL('profile', 'accept_request', args=[row.user_id])}}><font color="#000000">Accept</font></a></td>
+            <td><a href={{=URL('profile', 'decline_request', args=[row.user_id])}}><font color="#000000">Decline</font></a></td>
+        </tr>
+    {{pass}}
+</table>
+</body>

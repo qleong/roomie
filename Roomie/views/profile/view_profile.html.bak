@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+<body>
+    <div>
+        <h3>
+            {{=profile.first_name+" "+profile.last_name}}
+        </h3>
+        {{if(profile.image == ''):}}
+            no image
+        {{else:}}
+            {{=TAG.img(_width="150)",_src=URL(r=request,c='default',f='download',args=[profile.image]))}}
+        {{pass}}
+    {{=profile.bio}}
+    </div>
+    </br>
+    <div>
+    {{=profile.phone}}</br>
+    {{=A('Send Message', _class='btn', _href="URL('profile', 'send_message', args=(profile.user_id))")}}
+    </div>
+
+</body>
