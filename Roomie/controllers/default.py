@@ -21,6 +21,8 @@ def index():
     """
     #response.flash = T("Welcome to web2py!")
     #return dict(message=T('Hello World'))
+
+    #Redirect to my controller home.
     redirect(URL('profile','view_profile'))
 
 

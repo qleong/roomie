@@ -12,7 +12,7 @@ def get_last_name():
         name = auth.user.last_name
     return name
 
-
+#Table that holds information for user profiles
 db.define_table('user_profile',
                 Field('user_id', db.auth_user),
                 Field('first_name'),

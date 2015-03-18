@@ -1,6 +1,7 @@
 __author__ = 'Quintin'
 
 
+#Table that holds all of the review information for users
 db.define_table('review',
                 Field('friend_id'),
                 Field('user_id'),

@@ -2,7 +2,7 @@ __author__ = 'Quintin'
 
 from datetime import datetime
 
-
+#Table that holds all of the conversations
 db.define_table('conversation',
                 Field('sender'),
                 Field('recipient'),

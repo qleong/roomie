@@ -1,6 +1,7 @@
 __author__ = 'Quintin'
 
 
+#Table that holds the roomie relationships
 db.define_table('roomies',
     Field('user_id'),
     Field('friend_id'),
